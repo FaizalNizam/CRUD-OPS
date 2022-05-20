@@ -50,11 +50,17 @@ function AddUser(props) {
     const submitChange = async () => {
         if (user_id) {
 
-            dispatch(putAction(userDetail, user_id))
+            let response = await dispatch(putAction(userDetail, user_id))
+            if (response) {
+                navigate('/')
+            }
 
         } else {
 
-            dispatch(postAction(userDetail))
+            let response = await dispatch(postAction(userDetail))
+            if (response) {
+                navigate('/')
+            }
         }
     }
 

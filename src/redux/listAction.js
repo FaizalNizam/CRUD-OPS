@@ -33,7 +33,6 @@ export const getUserAction = (user_id) => async (dispatch) => {
     try {
         let response = await axios.get(`${url}/${user_id}`)
         let userData = response.data.data
-        console.log(userData);
         dispatch({ type: 'userData', payload: userData })
 
     } catch (error) {
@@ -47,7 +46,7 @@ export const putAction = (data, user_id) => async (dispatch) => {
     try {
 
         let response = await authAxios.put(`${url}/${user_id}`, data)
-        console.log(response);
+        return response
 
     } catch (error) {
         console.log('Error while calling api', error)
@@ -60,8 +59,8 @@ export const putAction = (data, user_id) => async (dispatch) => {
 export const postAction = (data) => async (dispatch) => {
     try {
         dispatch({type:'error',payload:{}})
-        let response = await authAxios.post(url, data)
-        console.log(response)
+        let response=await authAxios.post(url, data)
+        return response
         
     } catch (error) {
         console.log('Error while calling api', error)
