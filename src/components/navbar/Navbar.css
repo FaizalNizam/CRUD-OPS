@@ -1,0 +1,32 @@
+
+.userlist{
+    color: #013B82;
+    
+}
+
+p{
+    font-size: 16px;
+    color: #7C878E;
+    margin-top: -12px;
+    
+}
+
+.subdiv{
+    width:auto;
+    height: 100px;
+    background-color: rgb(219, 235, 235);
+}
+
+.p2{
+    color: #00695E;
+    
+    padding-top: 20px;
+}
+
+.button{
+    background-color: #0095DA;
+    border-style: none;
+    height: 30px;
+    color: white;
+}
+

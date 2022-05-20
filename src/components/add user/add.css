@@ -1,0 +1,86 @@
+.component{
+    margin-left: 20px;
+}
+
+.head{
+    margin-bottom: 20px;
+}
+
+.head a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #DA4081;
+}
+
+.userlabel{
+    color: #00695E;
+    font-size: 18px;
+}
+
+.labelhead{
+    font-size: 20px;
+    color: black;
+    
+}
+
+.labels{
+    font-size: 16px;
+    color:black;
+    margin-bottom: 10px;
+    
+}
+
+input{
+    border:1px solid #D4D4D4;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.cancel{
+    height: 30px;
+    width:70px;
+    border: 1px solid #7C878E;
+    align-items: center;
+    color: #7C878E;
+    margin-top: 30px;
+}
+
+.save{
+    height: 30px;
+    width:70px;
+    border: 1px solid #03619A;
+    align-items: center;
+    background-color: #03619A;
+    color: white;
+    margin-left: 10px;
+}
+
+.radios{
+    float: left;
+   
+}
+
+.radioLabel{
+    color: black;
+    
+}
+
+.radioGroup{
+    margin-bottom: 20px;
+}
+
+.radios input{
+    width:30px;
+    height:20px;
+    padding:10px
+}
+
+.select{
+    height:30px;
+    width:150px
+}
+
+.error{
+    color: red;
+    
+}
