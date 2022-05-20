@@ -29,7 +29,7 @@ function Table() {
 
 
   const dispatch = useDispatch()
-  const { data , pageLimit} = useSelector(state => state.userData)
+  const { data, pageLimit } = useSelector(state => state.userData)
 
   useEffect(() => {
     getUserData()
@@ -48,10 +48,14 @@ function Table() {
 
   //for delete functionality
   const handleDelete = async (delId) => {
-    await authAxios.delete(`${delUrl}/${delId}`)
-    let response = await axios.get(url)
-    if (response) {
-      getUserData()
+    if (window.confirm('Are you sure you want to delete?') == true) {
+      await authAxios.delete(`${delUrl}/${delId}`)
+      let response = await axios.get(url)
+      if (response) {
+        getUserData()
+      }
+    } else {
+      alert('Action cancelled')
     }
 
   }
@@ -120,7 +124,7 @@ function Table() {
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li><button onClick={() => handleEdit(obj.id)} className="dropdown-item" type="button">Edit</button></li>
-                    <li><button onClick={() => { handleDelete(obj.id); return window.confirm('Are you sure you want to delete?') }} className="dropdown-item" type="button">Delete</button></li>
+                    <li><button onClick={() => { handleDelete(obj.id) }} className="dropdown-item" type="button">Delete</button></li>
                     <li><button onClick={() => changeStatus(obj.status, obj.id)} className="dropdown-item" type="button">{obj.status == 'active' ? 'inactive' : 'active'}</button></li>
                   </ul>
                 </div>

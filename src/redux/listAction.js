@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-
 const url = 'https://gorest.co.in/public/v1/users'
 const token = '38768154575de830eba5672d754e7365c836fa8f42cb76186546018486801c64'
 
