@@ -31,10 +31,10 @@ function Table() {
   const dispatch = useDispatch()
   const { data, pageLimit } = useSelector(state => state.userData)
 
-  useEffect(() => {
+  /*useEffect(() => {
     getUserData()
 
-  }, [pages])
+  }, [pages])*/
 
   const getUserData = () => {
     dispatch(getAction(pages))
@@ -100,6 +100,7 @@ function Table() {
     <div className='component'>
       <label htmlFor="">Search: </label>
       <input style={{ marginLeft: '10px' }} type="text" placeholder='Search by Name and Email' onChange={(e) => handleSearch(e)} />
+      <button  className='btn btn-primary refresh' onClick={getUserData}>Refresh <i class="bi bi-arrow-clockwise"></i></button>
 
       <table>
         <thead>
