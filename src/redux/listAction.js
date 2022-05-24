@@ -19,7 +19,7 @@ export const getAction = (pages) => async (dispatch) => {
         let pageLimit = response.data.meta.pagination.pages
         localStorage.setItem('datas', JSON.stringify(data))
         localStorage.setItem('limit', JSON.stringify(pageLimit))
-        dispatch({ type: 'tableData', payload: { data: data, pageLimit: pageLimit } })
+        dispatch({ type: 'tableData', payload: { fetchdata: data, pageLimit: pageLimit } })
 
     } catch (error) {
         console.log('Error while calling api', error)
@@ -79,9 +79,10 @@ export const readData = (inputData) => (dispatch) => {
 
 }
 
-export const localDatas = (localdata) => (dispatch) => {
-    console.log(localdata);
-    dispatch({ type: 'localdata', payload: localdata })
+
+export const localDatas = (data) => (dispatch) => {
+    console.log("localdata232",data);
+    dispatch({ type: 'localdata', payload: data })
 }
 
 

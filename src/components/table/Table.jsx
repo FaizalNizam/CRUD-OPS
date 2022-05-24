@@ -26,30 +26,34 @@ function Table() {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('Asc')
   const [pages, setPages] = useState(1)
+  //localStorage.clear();
 
-
+  const localdata = JSON.parse(localStorage.getItem('datas'))
   const dispatch = useDispatch()
-  const { data, pageLimit } = useSelector(state => state.userData)
-  
-  console.log(data);
 
-  //const data = data || localdata
-  //console.log(data);
+  const { fetchdata, pageLimit } = useSelector(state => state.userData)
+  const localStoragedata = useSelector(state => state.userData)
+  const data = fetchdata || localStoragedata
+
   const limit = JSON.parse(localStorage.getItem('limit'))
   const setLimit = limit || pageLimit
 
+  
   useEffect(() => {
-    getUserData() 
-   
 
-  }, [pages])
+    if (localdata) {
+      console.log("localdata", localdata);
+      dispatch(localDatas(localdata))
+    } else {
+      console.log(localdata)
+      getUserData()
+    }
+
+
+  }, [])
 
   const getUserData = () => {
-
     dispatch(getAction(pages))
-    const localdata = JSON.parse(localStorage.getItem('datas'))
-    dispatch(localDatas(localdata))
-    console.log(localdata)
   }
 
   //Routing to edit
@@ -109,6 +113,7 @@ function Table() {
 
   return (
     <div className='component'>
+      {console.log("data", data)}
       <label htmlFor="">Search: </label>
       <input style={{ marginLeft: '10px' }} type="text" placeholder='Search by Name and Email' onChange={(e) => handleSearch(e)} />
       <button className='btn btn-primary refresh' onClick={getUserData}>Refresh <i className="bi bi-arrow-clockwise"></i></button>
@@ -122,6 +127,7 @@ function Table() {
             <th>Action</th>
           </tr>
         </thead>
+
 
         {data && data.filter(obj => obj.name.toLowerCase().includes(search.toLowerCase())).map((obj) => (
           <tbody key={obj.id}>

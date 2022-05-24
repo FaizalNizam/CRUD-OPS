@@ -19,7 +19,7 @@ export const getReducer = (state = { userData: [] ,userDetail: {}, errorData:{} 
             return {...state, userDetail: action.payload }
 
         case 'localdata':
-            
+            console.log("reducer", action.payload);
             return {...state, userData: action.payload}    
 
         default:
