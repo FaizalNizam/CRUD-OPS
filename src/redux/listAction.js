@@ -17,7 +17,8 @@ export const getAction = (pages) => async (dispatch) => {
         let response = await axios.get(`${url}?page=${pages}`)
         let data = response.data.data
         let pageLimit = response.data.meta.pagination.pages
-
+        localStorage.setItem('datas', JSON.stringify(data))
+        localStorage.setItem('limit', JSON.stringify(pageLimit))
         dispatch({ type: 'tableData', payload: { data: data, pageLimit: pageLimit } })
 
     } catch (error) {
@@ -56,26 +57,31 @@ export const putAction = (data, user_id) => async (dispatch) => {
 //create new user
 export const postAction = (data) => async (dispatch) => {
     try {
-        dispatch({type:'error',payload:{}})
-        let response=await authAxios.post(url, data)
+        dispatch({ type: 'error', payload: {} })
+        let response = await authAxios.post(url, data)
         return response
-        
+
     } catch (error) {
         console.log('Error while calling api', error)
         let response = {}
         response.field = error.response.data.data[0].field
         response.message = error.response.data.data[0].message
-        dispatch({type:'error',payload:response})
+        dispatch({ type: 'error', payload: response })
     }
 
 }
 
 
 //input data from form
-export const readData = (inputData)=>(dispatch)=>{
+export const readData = (inputData) => (dispatch) => {
 
-    dispatch({type:'userInput', payload:inputData})
+    dispatch({ type: 'userInput', payload: inputData })
 
+}
+
+export const localDatas = (localdata) => (dispatch) => {
+    console.log(localdata);
+    dispatch({ type: 'localdata', payload: localdata })
 }
 
 

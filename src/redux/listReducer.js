@@ -18,6 +18,10 @@ export const getReducer = (state = { userData: [] ,userDetail: {}, errorData:{} 
 
             return {...state, userDetail: action.payload }
 
+        case 'localdata':
+            
+            return {...state, userData: action.payload}    
+
         default:
             return state
     }

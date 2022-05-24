@@ -4,7 +4,7 @@ import './table.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAction } from '../../redux/listAction'
+import { getAction, localDatas } from '../../redux/listAction'
 
 
 function Table() {
@@ -30,15 +30,26 @@ function Table() {
 
   const dispatch = useDispatch()
   const { data, pageLimit } = useSelector(state => state.userData)
+  
+  console.log(data);
 
-  /*useEffect(() => {
-    getUserData()
+  //const data = data || localdata
+  //console.log(data);
+  const limit = JSON.parse(localStorage.getItem('limit'))
+  const setLimit = limit || pageLimit
 
-  }, [pages])*/
+  useEffect(() => {
+    getUserData() 
+   
+
+  }, [pages])
 
   const getUserData = () => {
-    dispatch(getAction(pages))
 
+    dispatch(getAction(pages))
+    const localdata = JSON.parse(localStorage.getItem('datas'))
+    dispatch(localDatas(localdata))
+    console.log(localdata)
   }
 
   //Routing to edit
@@ -100,7 +111,7 @@ function Table() {
     <div className='component'>
       <label htmlFor="">Search: </label>
       <input style={{ marginLeft: '10px' }} type="text" placeholder='Search by Name and Email' onChange={(e) => handleSearch(e)} />
-      <button  className='btn btn-primary refresh' onClick={getUserData}>Refresh <i class="bi bi-arrow-clockwise"></i></button>
+      <button className='btn btn-primary refresh' onClick={getUserData}>Refresh <i className="bi bi-arrow-clockwise"></i></button>
 
       <table>
         <thead>
@@ -120,7 +131,7 @@ function Table() {
               <td >{obj.gender}</td>
               <td>
                 <div className="dropdown" >
-                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                     <i className="bi bi-three-dots"></i>
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -138,17 +149,17 @@ function Table() {
 
       </table><br />
 
-      {pageLimit && <div className='d-flex justify-content-center'>
+      {setLimit && <div className='d-flex justify-content-center'>
         <ul className='pagination'>
           {pages > 1 ? <li className="page-link" role='button' onClick={() => setPages(1)}>Start</li> : null}
           {pages > 1 ? <li className="page-link" role='button' onClick={() => setPages(pages > 1 ? pages - 1 : null)}><i className="bi bi-skip-backward-circle"></i></li> : null}
           {pages > 2 ? <li className="page-link" role='button' onClick={() => setPages(pages - 2)}>{pages - 2}</li> : null}
           {pages > 1 ? <li className="page-link" role='button' onClick={() => setPages(pages - 1)}>{pages - 1}</li> : null}
           <li className="page-link" role='button' style={{ backgroundColor: '#9abef5' }}>{pages}</li>
-          {pages < pageLimit ? <li className="page-link" role='button' onClick={() => setPages(pages + 1)}>{pages + 1}</li> : null}
-          {pages < pageLimit - 1 ? <li className="page-link" role='button' onClick={() => setPages(pages + 2)}>{pages + 2}</li> : null}
-          {pages < pageLimit ? <li className="page-link" role='button' onClick={() => setPages(pages + 1)}><i className="bi bi-skip-forward-circle"></i></li> : null}
-          {pages < pageLimit ? <li className="page-link" role='button' onClick={() => setPages(pageLimit)}>End</li> : null}
+          {pages < setLimit ? <li className="page-link" role='button' onClick={() => setPages(pages + 1)}>{pages + 1}</li> : null}
+          {pages < setLimit - 1 ? <li className="page-link" role='button' onClick={() => setPages(pages + 2)}>{pages + 2}</li> : null}
+          {pages < setLimit ? <li className="page-link" role='button' onClick={() => setPages(pages + 1)}><i className="bi bi-skip-forward-circle"></i></li> : null}
+          {pages < setLimit ? <li className="page-link" role='button' onClick={() => setPages(setLimit)}>End</li> : null}
         </ul>
 
       </div>
